@@ -92,9 +92,11 @@ export const LeftBar = () => {
           ))}
         </div>
         {/*BUTTON*/}
-        <Link href={"/"}>
+        <Link
+          className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
+          href={"/"}
+        >
           <Image
-            className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
             src={"icons/post.svg"}
             alt="new post"
             width={24}
@@ -110,17 +112,19 @@ export const LeftBar = () => {
         {/*user*/}
         <div className="flex items-center justify-between ">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 relative rounded-fill overflow-hidden">
-              {/* <Image alt="something" width={24} height={24} src={"somenthing"}>
-                somenthing
-              </Image> */}
+            <div className="w-10 h-10 relative rounded-full overflow-hidden">
+              <Image
+                alt="profile-pic"
+                fill
+                src={"/general/samuraiChamploo.png"}
+              />
             </div>
-            <div>
-              <span>LeonardoMoreira</span>
-              <span>@guid0rizzi</span>
+            <div className="hidden xxl:flex flex-col">
+              <span className="font-bold">LeonardoMoreira</span>
+              <span className="text-sm text-textGray">@guid0rizzi</span>
             </div>
           </div>
-          <div className="">...</div>
+          <div className="hidden xxl:block cursor-pointer font-bold">...</div>
         </div>
       </div>
     </div>
