@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "./Image";
 const menuList = [
   {
     id: 1,
@@ -70,7 +70,7 @@ export const LeftBar = () => {
       <div className="flex flex-col gap-4 text-lg items-center xxl:items-start ">
         {/*logo*/}
         <Link href="/" className="p-2 rounded-full hover:bg-[#181818] flex ">
-          <Image src="icons/logo.svg" alt="logo" width={24} height={24} />
+          <Image path="icons/logo.svg" alt="logo" w={24} h={24} />
         </Link>
 
         {/*Menu List*/}
@@ -82,10 +82,10 @@ export const LeftBar = () => {
               key={item.id}
             >
               <Image
-                src={`icons/${item.icon}`}
+                path={`icons/${item.icon}`}
                 alt={item.name}
-                width={24}
-                height={24}
+                w={24}
+                h={24}
               />
               <span className="hidden xxl:inline">{item.name}</span>
             </Link>
@@ -96,12 +96,7 @@ export const LeftBar = () => {
           className="bg-white text-black rounded-full w-12 h-12 flex items-center justify-center xxl:hidden"
           href={"/"}
         >
-          <Image
-            src={"icons/post.svg"}
-            alt="new post"
-            width={24}
-            height={24}
-          ></Image>
+          <Image path={"icons/post.svg"} alt="new post" w={24} h={24}></Image>
         </Link>
         <Link
           href={"/"}
@@ -115,8 +110,10 @@ export const LeftBar = () => {
             <div className="w-10 h-10 relative rounded-full overflow-hidden">
               <Image
                 alt="profile-pic"
-                fill
-                src={"/general/samuraiChamploo.png"}
+                w={100}
+                h={100}
+                tr={true}
+                path={"/general/samuraiChamploo.png"}
               />
             </div>
             <div className="hidden xxl:flex flex-col">
