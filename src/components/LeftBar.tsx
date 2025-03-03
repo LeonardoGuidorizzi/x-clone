@@ -123,8 +123,8 @@ export const LeftBar = () => {
               <span className="font-bold">LeonardoMoreira</span>
               <span className="text-sm text-textGray">@guid0rizzi</span>
             </div>
+            <div className="hidden xxl:block cursor-pointer font-bold">...</div>
           </div>
-          <div className="hidden xxl:block cursor-pointer font-bold">...</div>
         </div>
       </div>
     </div>
