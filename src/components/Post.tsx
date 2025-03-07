@@ -2,6 +2,7 @@ import { imagekit } from "@/utils";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteraction from "./PostInteraction";
+import Video from "./Video";
 
 interface FileDetailsResponse {
   width: number;
@@ -24,7 +25,7 @@ const Post = async () => {
     });
   };
 
-  const fileDetails = await getFileDetails("67cacc9b432c4764160d4b3f"); // O post só ira mudar se alterar o id aqui
+  const fileDetails = await getFileDetails("67cad65c432c4764163f4500"); // O post só ira mudar se alterar o id aqui
 
   console.log(fileDetails);
 
@@ -76,12 +77,17 @@ const Post = async () => {
             qui sed repellat?
           </p>
           {/* <Image path="general/post.jpeg" alt="" w={600} h={600} /> */}
-          {fileDetails && (
+          {fileDetails && fileDetails.fileType === "image" ? (
             <Image
               path={fileDetails.filePath}
               alt=""
               w={fileDetails.width}
               h={fileDetails.height}
+              className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+            />
+          ) : (
+            <Video
+              path={fileDetails.filePath}
               className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
           )}
