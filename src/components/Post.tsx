@@ -9,7 +9,7 @@ interface FileDetailsResponse {
   filePath: string;
   url: string;
   fileType: string;
-  customMetaData?: { sensitive: boolean };
+  customMetadata?: { sensitive: boolean };
 }
 
 const Post = async () => {
@@ -23,7 +23,8 @@ const Post = async () => {
       });
     });
   };
-  const fileDetails = await getFileDetails("67c94e432c4764161f3a1");
+
+  const fileDetails = await getFileDetails("67cacc9b432c4764160d4b3f"); // O post só ira mudar se alterar o id aqui
 
   console.log(fileDetails);
 
@@ -81,7 +82,7 @@ const Post = async () => {
               alt=""
               w={fileDetails.width}
               h={fileDetails.height}
-              className={fileDetails.customMetaData?.sensitive ? "blur-lg" : ""}
+              className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
             />
           )}
           <PostInteraction />

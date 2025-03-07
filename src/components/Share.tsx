@@ -15,6 +15,8 @@ const Share = () => {
     type: "original",
     sensitive: false,
   });
+  console.log(media);
+
   const handleMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setMedia(e.target.files[0]);
@@ -44,7 +46,7 @@ const Share = () => {
           placeholder="What is happening?"
         />
         {/* PREVIEW IMAGE */}
-        {previewURL && (
+        {media?.type.includes("image") && previewURL && (
           <div className="relative rounded-xl overflow-hidden">
             <NextImage
               src={previewURL}
@@ -65,6 +67,23 @@ const Share = () => {
             >
               Edit
             </div>
+            <button
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white h-8 w-8 flex items-center justify-center rounded-full cursor-pointer font-bold"
+              onClick={() => setMedia(null)}
+            >
+              X
+            </button>
+          </div>
+        )}
+        {media?.type.includes("video") && previewURL && (
+          <div className="relative">
+            <video src={previewURL} controls />
+            <button
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white h-8 w-8 flex items-center justify-center rounded-full cursor-pointer font-bold"
+              onClick={() => setMedia(null)}
+            >
+              X
+            </button>
           </div>
         )}
         {IsEditorOpen && previewURL && (
@@ -83,6 +102,7 @@ const Share = () => {
               name="file"
               className="hidden"
               id="file"
+              accept="image/*,video/*"
             />
             <label htmlFor="file">
               <Image
