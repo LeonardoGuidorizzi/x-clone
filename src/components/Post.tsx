@@ -1,19 +1,31 @@
+import { imagekit } from "@/utils";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteraction from "./PostInteraction";
 
-const Post = async () => {
-  // const getFileDetails = async (fileId: string): Promise => {
-  //   return new Promise((resolve, reject) => {
-  //     imagekit.getFileDetails(fileId, function (error, result) {
-  //       if (error) console.log(error);
-  //       else console.log(result);
-  //     });
-  //   });
-  // };
-  // const fileDetails = await getFileDetails("67c99249432c4764160cf1b7");
+interface FileDetailsResponse {
+  width: number;
+  height: number;
+  filePath: string;
+  url: string;
+  fileType: string;
+  customMetaData?: { sensitive: boolean };
+}
 
-  // console.log(fileDetails);
+const Post = async () => {
+  const getFileDetails = async (
+    fileId: string
+  ): Promise<FileDetailsResponse> => {
+    return new Promise((resolve, reject) => {
+      imagekit.getFileDetails(fileId, function (error, result) {
+        if (error) reject(error);
+        else resolve(result as FileDetailsResponse);
+      });
+    });
+  };
+  const fileDetails = await getFileDetails("67c94e432c4764161f3a1");
+
+  console.log(fileDetails);
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
@@ -62,7 +74,16 @@ const Post = async () => {
             inventore quos veniam eius exercitationem, odio atque at ullam quas,
             qui sed repellat?
           </p>
-          <Image path="general/post.jpeg" alt="" w={600} h={600} />
+          {/* <Image path="general/post.jpeg" alt="" w={600} h={600} /> */}
+          {fileDetails && (
+            <Image
+              path={fileDetails.filePath}
+              alt=""
+              w={fileDetails.width}
+              h={fileDetails.height}
+              className={fileDetails.customMetaData?.sensitive ? "blur-lg" : ""}
+            />
+          )}
           <PostInteraction />
         </div>
       </div>
